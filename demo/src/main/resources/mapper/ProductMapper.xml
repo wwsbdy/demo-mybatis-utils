@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zj.demo.mapper.ProductMapper">
+
+    <resultMap id="productMap" type="com.zj.demo.entity.Product">
+        <id property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <!--通过ID查询单个product-->
+    <select id="findById" resultMap="productMap">
+        SELECT product_id, product_name, price
+        FROM product
+        WHERE product_id = #{id}
+    </select>
+
+    <!--修改product-->
+    <update id="update">
+        UPDATE product
+        SET product_name=#{productName},
+            price=#{price}
+        WHERE product_id = #{productId}
+    </update>
+
+    <!--通过ID删除单个product-->
+    <delete id="deleteById">
+        DELETE
+        FROM product
+        WHERE product_id = #{id}
+    </delete>
+
+</mapper>
